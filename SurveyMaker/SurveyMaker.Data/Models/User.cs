@@ -2,6 +2,9 @@
 {
     using Microsoft.AspNetCore.Identity;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using static DataConstants;
 
     public class User : IdentityUser
     {

@@ -2,6 +2,9 @@
 {
     public static class DataConstants
     {
+        public const int UserNameMinLength = 4;
+        public const int UserNameMaxLength = 20;
+
         public const int PollNameMinLength = 10;
         public const int PollNameMaxLength = 75;
         public const int PollDescriptionMinLength = 10;

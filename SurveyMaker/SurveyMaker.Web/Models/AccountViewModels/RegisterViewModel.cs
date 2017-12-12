@@ -1,13 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SurveyMaker.Web.Models.AccountViewModels
+﻿namespace SurveyMaker.Web.Models.AccountViewModels
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using static Data.DataConstants;
+
     public class RegisterViewModel
     {
+        //[Required]
+        //[MinLength(UserNameMinLength)]
+        //[MaxLength(UserNameMaxLength)]
+        //public string FirstName { get; set; }
+
+        //[Required]
+        //[MinLength(UserNameMinLength)]
+        //[MaxLength(UserNameMaxLength)]
+        //public string LastName { get; set; }
+
+        [Required]
+        [MinLength(4)]
+        [MaxLength(20)]
+        public string Username { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
