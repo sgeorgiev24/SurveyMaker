@@ -7,11 +7,13 @@
     using Microsoft.AspNetCore.Mvc;
     using Models.PollViewModels;
     using Services;
-    using System.Threading.Tasks;
+    using SurveyMaker.Services.Models;
 
     [Authorize]
     public class PollsController : Controller
     {
+        // TODO: Delete Poll
+
         private readonly IPollService polls;
         private readonly UserManager<User> userManager;
 
@@ -23,32 +25,25 @@
             this.userManager = userManager;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpGet]
         public IActionResult Create() => View();
 
         [HttpPost]
         [ValidateModelState]
-        public async Task<IActionResult> Create(CreatePollFormModel model)
+        public IActionResult Create(CreatePollFormModel model)
         {
             var userId = this.userManager.GetUserId(User);
 
-            await this.polls.CreateAsync(model.Name, model.Description, userId);
-            var pollId = this.polls.CreateAsync(model.Name, model.Description, userId).Id;
-
-            // TODO: Redirect to Polls/All
-            return RedirectToAction(nameof(All), new {  });
+            this.polls.Create(model.Name, model.Description, userId);
+            
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
         public IActionResult All()
         {
             var userId = this.userManager.GetUserId(User);
-            var model = this.polls.PollByUserId(userId);
+            var model = this.polls.PollsByUserId(userId);
 
             return View(model);
         }
@@ -56,14 +51,22 @@
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var model = this.polls.Edit(id);
-
-            if (model == null)
+            if (!this.polls.PollExist(id))
             {
                 return NotFound();
             }
 
+            var model = this.polls.PollById(id);
+            
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, PollFormServiceModel model)
+        {
+            this.polls.Edit(id, model.Name, model.Description);
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

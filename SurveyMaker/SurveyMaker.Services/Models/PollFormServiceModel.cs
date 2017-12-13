@@ -4,7 +4,7 @@
 
     using static Data.DataConstants;
 
-    public class EditPollServiceModel
+    public class PollFormServiceModel
     {
         [Required]
         [MinLength(PollNameMinLength)]

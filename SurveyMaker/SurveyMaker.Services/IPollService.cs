@@ -6,13 +6,20 @@
 
     public interface IPollService
     {
-        Task CreateAsync(
+        void Create(
             string name, 
             string description, 
             string authorId);
 
-        IEnumerable<PollListingServiceModel> PollByUserId(string userId);
+        IEnumerable<PollListingServiceModel> PollsByUserId(string userId);
 
-        EditPollServiceModel Edit(int pollId);
+        void Edit(
+            int pollId, 
+            string name, 
+            string description);
+
+        bool PollExist(int id);
+
+        PollFormServiceModel PollById(int id);
     }
 }
