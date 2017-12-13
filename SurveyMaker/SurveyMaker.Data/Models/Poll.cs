@@ -20,9 +20,6 @@
         public string UrlToken { get; set; }
 
         [Range(0, int.MaxValue)]
-        public int TotalVotes { get; set; }
-
-        [Range(0, int.MaxValue)]
         public int UsersCompleted { get; set; }
 
         public User Author { get; set; }

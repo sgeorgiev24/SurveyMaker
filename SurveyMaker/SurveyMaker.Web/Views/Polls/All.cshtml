@@ -1,0 +1,45 @@
+﻿@model IEnumerable<PollListingServiceModel>
+@{
+    ViewData["Title"] = $"All polls created by user { User.Identity.Name }";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Users completed
+            </th>
+            <th>
+                Number of questions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var poll in Model)
+        {
+            <tr>
+                <td>
+                    @poll.Name
+                </td>
+                <td>
+                    @poll.Description
+                </td>
+                <td>
+                    @poll.UsersCompleted
+                </td>
+                <td>
+                    @poll.Questions
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

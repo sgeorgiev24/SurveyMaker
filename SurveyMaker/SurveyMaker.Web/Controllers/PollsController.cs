@@ -1,6 +1,7 @@
 ﻿namespace SurveyMaker.Web.Controllers
 {
     using Data.Models;
+    using Infrastructure.Filters;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -31,19 +32,25 @@
         public IActionResult Create() => View();
 
         [HttpPost]
+        [ValidateModelState]
         public async Task<IActionResult> Create(CreatePollFormModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(ModelState);
-            }
-
             var userId = this.userManager.GetUserId(User);
 
             await this.polls.CreateAsync(model.Name, model.Description, userId);
+            var pollId = this.polls.CreateAsync(model.Name, model.Description, userId).Id;
 
-            // TODO: Redirect to Polls/Edit/{id}
-            return RedirectToAction(nameof(Index), "Home");
+            // TODO: Redirect to Polls/All
+            return RedirectToAction(nameof(All), new {  });
+        }
+
+        [HttpGet]
+        public IActionResult All()
+        {
+            var userId = this.userManager.GetUserId(User);
+            var model = this.polls.PollByUserId(userId);
+
+            return View(model);
         }
     }
 }
