@@ -6,10 +6,10 @@
 
     public class RegisterViewModel
     {
-        //[Required]
-        //[MinLength(UserNameMinLength)]
-        //[MaxLength(UserNameMaxLength)]
-        //public string FirstName { get; set; }
+        [Required]
+        [MinLength(UserNameMinLength)]
+        [MaxLength(UserNameMaxLength)]
+        public string FirstName { get; set; }
 
         //[Required]
         //[MinLength(UserNameMinLength)]
