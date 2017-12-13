@@ -1,12 +1,10 @@
 ﻿namespace SurveyMaker.Web.Models.PollViewModels
 {
-    using Common.Mapping;
-    using Data.Models;
     using System.ComponentModel.DataAnnotations;
 
     using static Data.DataConstants;
 
-    public class CreatePollViewModel : IMapFrom<Poll>
+    public class CreatePollFormModel
     {
         [MinLength(PollNameMinLength)]
         [MaxLength(PollNameMaxLength)]

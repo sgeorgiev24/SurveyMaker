@@ -13,6 +13,11 @@
         [MaxLength(UserNameMaxLength)]
         public string FirstName { get; set; }
 
+        //[Required]
+        //[MinLength(UserNameMinLength)]
+        //[MaxLength(UserNameMaxLength)]
+        //public string LastName { get; set; }
+
         public List<Poll> Polls { get; set; } = new List<Poll>();
     }
 }
