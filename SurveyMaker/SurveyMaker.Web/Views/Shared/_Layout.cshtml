@@ -31,6 +31,17 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Polls
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-area="" asp-controller="Polls" asp-action="Create">Create Poll</a></li>
+                            <li><a asp-area="" asp-controller="Polls" asp-action="All">My Polls</a></li>
+                        </ul>
+                    </li>
+                    
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>

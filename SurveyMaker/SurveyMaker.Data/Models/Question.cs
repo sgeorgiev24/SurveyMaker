@@ -8,6 +8,7 @@
     {
         public int Id { get; set; }
 
+        [Required]
         [MinLength(QuestionTitleMinLength)]
         [MaxLength(QuestionTitleMaxLength)]
         public string Title { get; set; }

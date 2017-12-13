@@ -11,9 +11,10 @@ using System;
 namespace SurveyMaker.Data.Migrations
 {
     [DbContext(typeof(SurveyMakerDbContext))]
-    partial class SurveyMakerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171213131025_StringsRequired")]
+    partial class StringsRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

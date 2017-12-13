@@ -12,5 +12,7 @@
             string authorId);
 
         IEnumerable<PollListingServiceModel> PollByUserId(string userId);
+
+        EditPollServiceModel Edit(int pollId);
     }
 }

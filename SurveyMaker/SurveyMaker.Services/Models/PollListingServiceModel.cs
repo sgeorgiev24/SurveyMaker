@@ -12,18 +12,20 @@
         
         public string Description { get; set; }
         
-        public int UsersCompleted { get; set; }
 
-        public string AuthorId { get; set; }
 
-        public string Author { get; set; }
+        //public int UsersCompleted { get; set; }
 
-        public int Questions { get; set; }
+        //public string AuthorId { get; set; }
+
+        //public string Author { get; set; }
+
+        //public int QuestionsCount { get; set; }
 
         //public void ConfigureMapping(Profile mapper)
         //    => mapper
         //        .CreateMap<Poll, PollListingServiceModel>()
-        //        .ForMember(p => p.Questions, cfg => cfg
+        //        .ForMember(p => p.QuestionsCount, cfg => cfg
         //            .MapFrom(p => p.Questions.Count))
         //        .ForMember(p => p.Author, cfg => cfg
         //            .MapFrom(p => p.Author.UserName));

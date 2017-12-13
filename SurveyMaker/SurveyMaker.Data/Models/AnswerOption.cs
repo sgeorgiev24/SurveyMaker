@@ -8,6 +8,7 @@
     {
         public int Id { get; set; }
 
+        [Required]
         [MinLength(AnswerOptionTextMinLength)]
         [MaxLength(AnswerOptionTextMaxLength)]
         public string Text { get; set; }

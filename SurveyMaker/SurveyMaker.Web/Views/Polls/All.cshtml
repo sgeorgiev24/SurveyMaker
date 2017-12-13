@@ -2,44 +2,23 @@
 @{
     ViewData["Title"] = $"All polls created by user { User.Identity.Name }";
 }
-
 <h2>@ViewData["Title"]</h2>
 
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Users completed
-            </th>
-            <th>
-                Number of questions
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var poll in Model)
-        {
-            <tr>
-                <td>
-                    @poll.Name
-                </td>
-                <td>
-                    @poll.Description
-                </td>
-                <td>
-                    @poll.UsersCompleted
-                </td>
-                <td>
-                    @poll.Questions
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
+
+<div class="row">
+    @foreach (var poll in Model)
+    {
+        <div class="col-sm-6">
+            <div class="card pollListing">
+                <div class="card-block">
+                    <h3 class="card-title">@poll.Name</h3>
+                    <p class="card-text">@poll.Description</p>
+                    <a asp-area="" asp-controller="Polls" asp-action="Edit" asp-route-id="@poll.Id" class="btn btn-primary">Edit</a>
+
+                    <a asp-area="" asp-controller="Polls" asp-action="Details" asp-route-id="@poll.Id" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

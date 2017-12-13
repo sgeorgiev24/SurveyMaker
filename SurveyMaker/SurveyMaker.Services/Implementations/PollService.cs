@@ -33,20 +33,23 @@
             await this.db.SaveChangesAsync();
         }
 
+        public EditPollServiceModel Edit(int pollId)
+        {
+            var poll = db.Polls.Find(pollId);
+
+            var model = new EditPollServiceModel
+            {
+                Name = poll.Name,
+                Description = poll.Description
+            };
+
+            return model;
+        }
+
         public IEnumerable<PollListingServiceModel> PollByUserId(string userId)
             => this.db.Polls
                 .Where(p => p.AuthorId == userId)
-                .Select(p => new PollListingServiceModel
-                {
-                    Name = p.Name,
-                    Author = p.Author.UserName,
-                    AuthorId = p.AuthorId,
-                    Description = p.Description,
-                    Id = p.Id,
-                    Questions = p.Questions.Count,
-                    UsersCompleted = p.UsersCompleted
-                })
-                //.ProjectTo<PollListingServiceModel>()
+                .ProjectTo<PollListingServiceModel>()
                 .ToList();
     }
 }
