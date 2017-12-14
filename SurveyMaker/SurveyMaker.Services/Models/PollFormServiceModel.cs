@@ -1,10 +1,13 @@
 ﻿namespace SurveyMaker.Services.Models
 {
+    using Data.Models;
+    using Common.Mapping;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using static Data.DataConstants;
 
-    public class PollFormServiceModel
+    public class PollFormServiceModel : IMapFrom<Poll>
     {
         [Required]
         [MinLength(PollNameMinLength)]
@@ -16,6 +19,6 @@
         [MaxLength(PollDescriptionMaxLength)]
         public string Description { get; set; }
 
-        //public List<Question> Questions { get; set; } = new List<Question>();
+        public IEnumerable<ListingQuestionsServiceModel> Questions { get; set; }
     }
 }

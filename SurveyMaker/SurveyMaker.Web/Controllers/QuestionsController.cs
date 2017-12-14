@@ -1,18 +1,31 @@
 ﻿namespace SurveyMaker.Web.Controllers
 {
+    using Infrastructure.Filters;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Models.QuestionViewModels;
+    using Services;
 
     [Authorize]
     public class QuestionsController : Controller
     {
+        private readonly IQuestionService questions;
+
+        public QuestionsController(IQuestionService questions)
+        {
+            this.questions = questions;
+        }
+
         [HttpGet]
         public IActionResult Create() => View();
 
         [HttpPost]
-        public IActionResult Create([FromRoute]int id)
+        [ValidateModelState]
+        public IActionResult Create([FromQuery]int pollId, CreateQuestionFormModel model)
         {
-            return View();
+            this.questions.Create(pollId, model.Title, model.AnswerOptions);
+
+            return RedirectToAction(nameof(PollsController.Edit), "Polls", new { id = pollId });
         }
     }
 }
