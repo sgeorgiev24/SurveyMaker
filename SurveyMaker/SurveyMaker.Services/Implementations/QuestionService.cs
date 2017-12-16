@@ -3,6 +3,7 @@
     using Data;
     using SurveyMaker.Data.Models;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class QuestionService : IQuestionService
     {
@@ -42,5 +43,8 @@
 
             this.db.SaveChanges();
         }
+
+        public bool QuestionExist(int id)
+            => this.db.Questions.Any(q => q.Id == id);
     }
 }

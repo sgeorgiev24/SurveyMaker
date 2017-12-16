@@ -8,5 +8,7 @@
             int pollId,
             string title,
             IEnumerable<string> answerOptions);
+
+        bool QuestionExist(int id);
     }
 }

@@ -27,5 +27,17 @@
 
             return RedirectToAction(nameof(PollsController.Edit), "Polls", new { id = pollId });
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            if (!this.questions.QuestionExist(id))
+            {
+                return NotFound();
+            }
+
+            // TODO: get model and return View with model.
+            return View();
+        }
     }
 }
