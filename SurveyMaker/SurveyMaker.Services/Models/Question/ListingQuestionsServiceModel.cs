@@ -1,4 +1,4 @@
-﻿namespace SurveyMaker.Services.Models
+﻿namespace SurveyMaker.Services.Models.Question
 {
     using Common.Mapping;
     using Data.Models;

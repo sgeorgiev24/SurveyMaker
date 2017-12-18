@@ -12,6 +12,7 @@
         <div class="col-sm-6">
             <div class="card pollListing">
                 <div class="card-block">
+                    <span>@poll.QuestionsCount questions</span>
                     <h3 class="card-title">@poll.Name</h3>
                     <p class="card-text">@poll.Description</p>
                     <a asp-area="" asp-controller="Polls" asp-action="Edit" asp-route-id="@poll.Id" class="btn btn-primary">Edit</a>

@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Models.PollViewModels;
     using Services;
-    using SurveyMaker.Services.Models;
+    using Services.Models.Poll;
 
     [Authorize]
     public class PollsController : Controller
@@ -30,7 +30,7 @@
 
         [HttpPost]
         [ValidateModelState]
-        public IActionResult Create(CreatePollFormModel model)
+        public IActionResult Create(CreatePollFormViewModel model)
         {
             var userId = this.userManager.GetUserId(User);
 
@@ -62,6 +62,7 @@
         }
 
         [HttpPost]
+        [ValidateModelState]
         public IActionResult Edit(int id, PollFormServiceModel model)
         {
             this.polls.Edit(id, model.Name, model.Description);

@@ -5,6 +5,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Models.QuestionViewModels;
     using Services;
+    using Services.Models.Question;
+    using System.Collections.Generic;
 
     [Authorize]
     public class QuestionsController : Controller
@@ -21,13 +23,13 @@
 
         [HttpPost]
         [ValidateModelState]
-        public IActionResult Create([FromQuery]int pollId, CreateQuestionFormModel model)
+        public IActionResult Create([FromQuery]int pollId, CreateQuestionFormViewModel model)
         {
             this.questions.Create(pollId, model.Title, model.AnswerOptions);
 
             return RedirectToAction(nameof(PollsController.Edit), "Polls", new { id = pollId });
         }
-
+        
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -36,8 +38,18 @@
                 return NotFound();
             }
 
-            // TODO: get model and return View with model.
-            return View();
+            var model = this.questions.QuestionById(id);
+
+            return View(model);
+        }
+        
+        [HttpPost]
+        [ValidateModelState]
+        public IActionResult Edit(int id, EditQuestionServiceModel model)
+        {
+            this.questions.Edit(id, model.Title, model.AnswerOptions, model.AnswerOptionsIds);
+
+            return RedirectToAction(nameof(PollsController.Edit), "Polls");
         }
     }
 }

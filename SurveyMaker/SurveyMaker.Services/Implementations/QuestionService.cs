@@ -1,9 +1,11 @@
 ﻿namespace SurveyMaker.Services.Implementations
 {
+    using AutoMapper.QueryableExtensions;
     using Data;
     using SurveyMaker.Data.Models;
     using System.Collections.Generic;
     using System.Linq;
+    using SurveyMaker.Services.Models.Question;
 
     public class QuestionService : IQuestionService
     {
@@ -43,6 +45,45 @@
 
             this.db.SaveChanges();
         }
+        
+        public void Edit(int questionId, string title, IEnumerable<string> answerOptions, IEnumerable<int> answerOptionsIds)
+        {
+            var question = this.db.Questions.Find(questionId);
+
+            question.Title = title;
+
+            var answers = new List<string>(answerOptions);
+
+            foreach (var answerId in answerOptionsIds)
+            {
+                var answer = this.db.AnswerOptions.Find(answerId);
+                foreach (var answerText in answers.ToList())
+                {
+                    answer.Text = answerText;
+                    answers.Remove(answerText);
+                    break;
+                }
+                this.db.SaveChanges();
+            }
+            foreach (var answer in answers)
+            {
+                var answerOptionDb = new AnswerOption
+                {
+                    QuestionId = questionId,
+                    Text = answer
+                };
+
+                this.db.Add(answerOptionDb);
+            }
+
+            this.db.SaveChanges();
+        }
+
+        public QuestionFormServiceModel QuestionById(int id)
+            => this.db.Questions
+                .Where(q => q.Id == id)
+                .ProjectTo<QuestionFormServiceModel>()
+                .FirstOrDefault();
 
         public bool QuestionExist(int id)
             => this.db.Questions.Any(q => q.Id == id);

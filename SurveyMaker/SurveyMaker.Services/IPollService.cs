@@ -1,8 +1,7 @@
 ﻿namespace SurveyMaker.Services
 {
-    using SurveyMaker.Services.Models;
+    using SurveyMaker.Services.Models.Poll;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
 
     public interface IPollService
     {

@@ -26,12 +26,12 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
-            @if (Model.Questions.FirstOrDefault() != null)
+            @if (Model.Questions != null)
             {
                 <h2>Questions:</h2>
+                @Html.Partial("_ListingPollQuestionsPartial")
             }
 
-            @Html.Partial("_ListingPollQuestionsPartial")
 
             <a asp-area="" asp-controller="Questions" asp-action="Create" asp-all-route-data=@pollIdQueryString class="btn btn-default">Add Question</a>
 
@@ -40,3 +40,6 @@
     </div>
 </div>
 
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

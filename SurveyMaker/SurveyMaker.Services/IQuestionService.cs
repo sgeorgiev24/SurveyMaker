@@ -1,5 +1,6 @@
 ﻿namespace SurveyMaker.Services
 {
+    using Services.Models.Question;
     using System.Collections.Generic;
 
     public interface IQuestionService
@@ -10,5 +11,12 @@
             IEnumerable<string> answerOptions);
 
         bool QuestionExist(int id);
+
+        QuestionFormServiceModel QuestionById(int id);
+
+        void Edit(int questionId,
+            string title,
+            IEnumerable<string> answerOptions,
+            IEnumerable<int> answerOptionsIds);
     }
 }

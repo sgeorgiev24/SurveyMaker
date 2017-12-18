@@ -3,7 +3,7 @@
     using AutoMapper.QueryableExtensions;
     using Data;
     using Data.Models;
-    using SurveyMaker.Services.Models;
+    using Services.Models.Poll;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -29,7 +29,7 @@
             poll.UrlToken = Guid.NewGuid().ToString().Replace("-", string.Empty);
 
             this.db.Add(poll);
-            this.db.SaveChangesAsync();
+            this.db.SaveChanges();
         }
 
         public void Edit(int pollId, string name, string description)
