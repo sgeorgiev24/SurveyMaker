@@ -9,12 +9,14 @@
 
     public class QuestionFormServiceModel : IMapFrom<Question>
     {
+        public int Id { get; set; }
+
         [Required]
         [MinLength(QuestionTitleMinLength)]
         [MaxLength(QuestionTitleMaxLength)]
         public string Title { get; set; }
 
         [Display(Name = "Answer Option")]
-        public IEnumerable<AnswerOption> AnswerOptions { get; set; }
+        public ICollection<AnswerOption> AnswerOptions { get; set; }
     }
 }

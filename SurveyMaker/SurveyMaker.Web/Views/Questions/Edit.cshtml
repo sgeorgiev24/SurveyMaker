@@ -26,7 +26,8 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="AnswerOptions" name="AnswerOptions" value="@answerOption.Text">
                                 <span class="input-group-btn">
-                                    <a class="btn btn-default" data-toggle="modal" data-target="#modal-@answerOption.Id">
+                                    <a class=@(Model.AnswerOptions.Count > 2 ? $"btn btn-default" : "btn btn-default disabled")
+                                       data-toggle="modal" data-target=@(Model.AnswerOptions.Count > 2 ? $"#modal-{answerOption.Id}" : string.Empty)>
                                         <span class="glyphicon glyphicon-remove" style="color: red"></span>
                                     </a>
                                 </span>
@@ -51,8 +52,8 @@
                                 <p>Are you sure you want to delete this answer option?</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <a asp-controller="AnswerOptions" asp-action="Delete" asp-route-id="@answerOption.Id" class="btn btn-primary">Save changes</a>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <a asp-controller="Answers" asp-action="Delete" asp-route-id="@answerOption.Id" asp-route-questionId="@Model.Id" class="btn btn-primary">Yes, delete it.</a>
                             </div>
                         </div>
                     </div>
