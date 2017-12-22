@@ -49,7 +49,7 @@
         {
             this.questions.Edit(id, model.Title, model.AnswerOptions, model.AnswerOptionsIds);
 
-            return RedirectToAction(nameof(PollsController.Edit), "Polls");
+            return RedirectToAction(nameof(Edit),  new { id = model.Id });
         }
     }
 }

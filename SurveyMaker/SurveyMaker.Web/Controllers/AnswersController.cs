@@ -8,10 +8,14 @@
     public class AnswersController : Controller
     {
         private readonly IAnswerService answers;
+        private readonly IQuestionService questions;
 
-        public AnswersController(IAnswerService answers)
+        public AnswersController(
+            IAnswerService answers,
+            IQuestionService questions)
         {
             this.answers = answers;
+            this.questions = questions;
         }
 
         [HttpGet]
@@ -21,10 +25,14 @@
             {
                 return NotFound();
             }
+            if (this.questions.AnswersCount(int.Parse(questionId)) <= 2)
+            {
+                return BadRequest();
+            }
 
             this.answers.Delete(id);
 
-            return RedirectToAction(nameof(QuestionsController.Edit), "Questions", new { id = questionId });
+            return RedirectToAction(nameof(QuestionsController.Edit), "Questions", new { id = int.Parse(questionId) });
         }
 
         [HttpPost]

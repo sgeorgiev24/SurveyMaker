@@ -7,6 +7,8 @@
 
     public class EditQuestionServiceModel
     {
+        public int Id { get; set; }
+
         public string Title { get; set; }
         
         public IEnumerable<string> AnswerOptions { get; set; }

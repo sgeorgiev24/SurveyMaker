@@ -16,6 +16,12 @@
             this.db = db;
         }
 
+        public int AnswersCount(int id)
+            => this.db.AnswerOptions
+                .Where(a => a.QuestionId == id)
+                .ToList()
+                .Count;
+
         public void Create(
             int pollId, 
             string title, 

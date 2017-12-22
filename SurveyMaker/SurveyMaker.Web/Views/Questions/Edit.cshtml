@@ -1,7 +1,7 @@
 ﻿@model QuestionFormServiceModel
 
 @{
-    ViewData["Title"] = $"Edit question";
+    ViewData["Title"] = "Edit question";
 }
 
 <h2>Edit @Model.Title question</h2>
@@ -24,12 +24,23 @@
 
                         <div class="input-group">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="AnswerOptions" name="AnswerOptions" value="@answerOption.Text">
+                                <input type="text" style="width: 320px" class="form-control" id="AnswerOptions" name="AnswerOptions" value="@answerOption.Text" maxlength="50">
+
                                 <span class="input-group-btn">
-                                    <a class=@(Model.AnswerOptions.Count > 2 ? $"btn btn-default" : "btn btn-default disabled")
-                                       data-toggle="modal" data-target=@(Model.AnswerOptions.Count > 2 ? $"#modal-{answerOption.Id}" : string.Empty)>
-                                        <span class="glyphicon glyphicon-remove" style="color: red"></span>
-                                    </a>
+                                    @if (Model.AnswerOptions.Count > 2)
+                                    {
+                                        <a class="btn btn-default" data-toggle="modal" data-target="#modal-@answerOption.Id">
+                                            <span class="glyphicon glyphicon-remove" style="color: red"></span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-default" disabled data-toggle="modal" >
+                                            <span class="glyphicon glyphicon-remove" style="color: red"></span>
+                                        </a>
+                                    }
+
+                                                
                                 </span>
                             </div>
                         </div>
@@ -61,7 +72,7 @@
             }
 
             <span class="btn btn-default addAnswerOption">Add answer option</span>
-            <button type="submit" class="btn btn-primary">Edit Question</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
     </div>
 </div>
