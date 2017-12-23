@@ -20,5 +20,7 @@
         bool PollExist(int id);
 
         PollFormServiceModel PollById(int id);
+
+        PollDetailsServiceModel GetPollDetails(int id);
     }
 }

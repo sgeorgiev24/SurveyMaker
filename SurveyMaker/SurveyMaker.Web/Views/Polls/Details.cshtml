@@ -1,0 +1,32 @@
+﻿@model PollDetailsServiceModel
+@{
+    ViewData["Title"] = $"{Model.Name} poll details";
+}
+<div class="row">
+    <div class="col-md-6">
+        <h2>@ViewData["Title"]</h2>
+        <h3>Poll name: @Model.Name </h3>
+        <h3>Description: @Model.Description </h3>
+        <h3>Poll url:</h3> <input type="text" value="localhost:63012/@Model.UrlToken" class="form-control text-center" />
+        <h3>Users completed poll: @Model.UsersCompleted </h3>
+        <h3>Questions count: @Model.Questions.ToList().Count</h3>
+        @if (Model.Questions.ToList().Count > 0)
+        {
+            <h2 class="text-info">Questions statistics:</h2>
+        }
+
+        @foreach (var question in Model.Questions)
+        {
+            <h3>@question.Title</h3>
+            <ul class="list-group">
+                @foreach (var answer in question.AnswerOptions)
+                {
+                    <li class="list-group-item">                        
+                        @answer.Text
+                        <span class="badge">@answer.Votes votes</span>
+                    </li>
+                }
+            </ul>
+        }
+        </div>
+</div>

@@ -49,6 +49,18 @@
         }
 
         [HttpGet]
+        public IActionResult Details(int id)
+        {
+            if (!this.polls.PollExist(id))
+            {
+                return NotFound();
+            }
+            var model = this.polls.GetPollDetails(id);
+
+            return View(model);
+        }
+
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             if (!this.polls.PollExist(id))

@@ -57,5 +57,11 @@
                 .Where(p => p.Id == id)
                 .ProjectTo<PollFormServiceModel>()
                 .FirstOrDefault();
+
+        public PollDetailsServiceModel GetPollDetails(int id)
+            => this.db.Polls
+                .Where(p => p.Id == id)
+                .ProjectTo<PollDetailsServiceModel>()
+                .FirstOrDefault();
     }
 }
