@@ -63,5 +63,23 @@
                 .Where(p => p.Id == id)
                 .ProjectTo<PollDetailsServiceModel>()
                 .FirstOrDefault();
+
+        public PollCompleteServiceModel PollByUrlToken(string urlToken)
+            => this.db.Polls
+                .Where(p => p.UrlToken == urlToken)
+                .ProjectTo<PollCompleteServiceModel>()
+                .FirstOrDefault();
+
+        public void SaveDataFromPoll(int pollId, IEnumerable<int> answersIds)
+        {
+            var poll = this.db.Polls.Find(pollId);
+            poll.UsersCompleted++;
+            foreach (var id in answersIds)
+            {
+                var answerOption = this.db.AnswerOptions.Find(id);
+                answerOption.Votes++;
+            }
+            this.db.SaveChanges();
+        }
     }
 }

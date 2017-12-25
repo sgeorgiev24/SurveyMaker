@@ -71,6 +71,15 @@
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "poll",
+                    template: "{urlToken}",
+                    defaults: new
+                    {
+                        controller = "Polls",
+                        action = "Complete"
+                    });
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

@@ -8,6 +8,7 @@
     using Models.PollViewModels;
     using Services;
     using Services.Models.Poll;
+    using System.Collections.Generic;
 
     [Authorize]
     public class PollsController : Controller
@@ -80,6 +81,33 @@
             this.polls.Edit(id, model.Name, model.Description);
 
             return RedirectToAction(nameof(All));
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Complete(string urlToken)
+        {
+            var model = this.polls.PollByUrlToken(urlToken);
+
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult Complete(int pollId, Dictionary<string, string> formData)
+        {
+            var answersIds = new List<int>();
+
+            formData.Remove("__RequestVerificationToken");
+            formData.Remove("pollId");
+
+            foreach (var data in formData)
+            {
+                answersIds.Add(int.Parse(data.Value));
+            }
+            this.polls.SaveDataFromPoll(pollId, answersIds);
+
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
     }
 }

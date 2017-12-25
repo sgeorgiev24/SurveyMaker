@@ -1,0 +1,25 @@
+﻿@model PollCompleteServiceModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<h3 class="text-center text-info">@Model.Description</h3>
+
+<form method="post">
+    <input type="hidden" value="@Model.Id" name="pollId" />
+    @foreach (var question in Model.Questions)
+    {
+        <h4>@question.Title</h4>
+
+        @foreach (var answer in question.AnswerOptions)
+        {
+            <span>@answer.Text</span>
+            <input name="@question.Title-@question.Id" value="@answer.Id" type="radio" /><br />
+        }
+    }
+    <button type="submit" class="btn btn-primary">Complete survey</button>
+</form>
+

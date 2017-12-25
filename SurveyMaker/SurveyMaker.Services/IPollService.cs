@@ -22,5 +22,9 @@
         PollFormServiceModel PollById(int id);
 
         PollDetailsServiceModel GetPollDetails(int id);
+
+        PollCompleteServiceModel PollByUrlToken(string urlToken);
+
+        void SaveDataFromPoll(int pollId, IEnumerable<int> answersIds);
     }
 }
