@@ -51,7 +51,15 @@
 
             this.db.SaveChanges();
         }
-        
+
+        public void Delete(int id)
+        {
+            var question = this.db.Questions.Find(id);
+
+            this.db.Remove(question);
+            this.db.SaveChanges();
+        }
+
         public void Edit(int questionId, string title, IEnumerable<string> answerOptions, IEnumerable<int> answerOptionsIds)
         {
             var question = this.db.Questions.Find(questionId);

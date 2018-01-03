@@ -54,6 +54,7 @@
             {
                 return NotFound();
             }
+
             var model = this.polls.GetPollDetails(id);
 
             return View(model);

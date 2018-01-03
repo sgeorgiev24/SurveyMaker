@@ -10,6 +10,8 @@
             string title,
             IEnumerable<string> answerOptions);
 
+        void Delete(int id);
+
         bool QuestionExist(int id);
 
         QuestionFormServiceModel QuestionById(int id);

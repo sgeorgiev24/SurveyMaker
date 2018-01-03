@@ -29,6 +29,19 @@
 
             return RedirectToAction(nameof(PollsController.Edit), "Polls", new { id = pollId });
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id, string pollId)
+        {
+            if (!this.questions.QuestionExist(id))
+            {
+                return NotFound();
+            }
+
+            this.questions.Delete(id);
+
+            return RedirectToAction(nameof(PollsController.Edit), "Polls", new { id = int.Parse(pollId) });
+        }
         
         [HttpGet]
         public IActionResult Edit(int id)

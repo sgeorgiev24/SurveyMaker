@@ -2,7 +2,7 @@
 
 @foreach (var question in Model.Questions)
 {
-    <h3>@question.Title</h3> 
+    <h3>@question.Title</h3>
     <ul class="list-group">
         @foreach (var answer in question.AnswerOptions)
         {
@@ -45,5 +45,27 @@
         }
     </ul>
     <a asp-area="" asp-controller="Questions" asp-action="Edit" asp-route-id="@question.Id" class="btn btn-default">Edit question</a>
+
+    <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal-@question.Id">Delete Question</a>
     <hr />
+
+    <div class="modal fade" id="modal-@question.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">  
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Delete question "@question.Title"...</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this question?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a asp-controller="Questions" asp-action="Delete" asp-route-id="@question.Id" asp-route-pollId="@Model.Id" class="btn btn-primary">Yes, delete it.</a>
+                </div>
+            </div>
+        </div>
+    </div>
 }
