@@ -25,6 +25,6 @@
 
         PollCompleteServiceModel PollByUrlToken(string urlToken);
 
-        void SaveDataFromPoll(int pollId, IEnumerable<int> answersIds);
+        void SaveDataFromPoll(int pollId, Dictionary<string, string> formData);
     }
 }

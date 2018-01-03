@@ -70,9 +70,33 @@
                 .ProjectTo<PollCompleteServiceModel>()
                 .FirstOrDefault();
 
-        public void SaveDataFromPoll(int pollId, IEnumerable<int> answersIds)
+        public void SaveDataFromPoll(int pollId, Dictionary<string, string> formData)
         {
-            var poll = this.db.Polls.Find(pollId);
+            var answersIds = new List<int>();
+
+            var poll = this.db
+                .Polls
+                .Find(pollId);
+
+            var pollQuestions = this.db
+                .Questions
+                .Where(q => q.PollId == poll.Id)
+                .Select(q => new Question
+                {
+                    Id = q.Id,
+                    Title = q.Title
+                })
+                .ToList();
+
+            foreach (var data in formData)
+            {
+                var keyIsQuestion = pollQuestions.Any(q => q.Title + "-" + q.Id == data.Key);
+                if (keyIsQuestion)
+                {
+                    answersIds.Add(int.Parse(data.Value));
+                }
+            }
+
             poll.UsersCompleted++;
             foreach (var id in answersIds)
             {

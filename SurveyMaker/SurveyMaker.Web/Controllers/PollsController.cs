@@ -96,16 +96,7 @@
         [HttpPost]
         public IActionResult Complete(int pollId, Dictionary<string, string> formData)
         {
-            var answersIds = new List<int>();
-
-            formData.Remove("__RequestVerificationToken");
-            formData.Remove("pollId");
-
-            foreach (var data in formData)
-            {
-                answersIds.Add(int.Parse(data.Value));
-            }
-            this.polls.SaveDataFromPoll(pollId, answersIds);
+            this.polls.SaveDataFromPoll(pollId, formData);
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
