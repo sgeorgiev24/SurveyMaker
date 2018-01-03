@@ -48,6 +48,11 @@
         </div>
     </nav>
     <div class="container body-content">
+        @if (TempData.ContainsKey("success"))
+        {
+            <h4 class="alert alert-success text-center">@TempData[SurveyMaker.Web.WebConstants.SuccessMessage]</h4>
+        }
+
         @RenderBody()
         <hr />
         <footer>

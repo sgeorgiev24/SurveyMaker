@@ -6,6 +6,7 @@
     using Models.QuestionViewModels;
     using Services;
     using Services.Models.Question;
+    using SurveyMaker.Web.Infrastructure.Extensions;
     using System.Collections.Generic;
 
     [Authorize]
@@ -39,6 +40,8 @@
             }
 
             this.questions.Delete(id);
+            
+            TempData.AddSuccessMessage("Question deleted.");
 
             return RedirectToAction(nameof(PollsController.Edit), "Polls", new { id = int.Parse(pollId) });
         }
