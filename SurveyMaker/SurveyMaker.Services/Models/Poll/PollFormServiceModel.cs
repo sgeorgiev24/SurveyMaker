@@ -10,6 +10,8 @@
 
     public class PollFormServiceModel : IMapFrom<Poll>
     {
+        public int Id { get; set; }
+
         [MinLength(PollNameMinLength)]
         [MaxLength(PollNameMaxLength)]
         public string Name { get; set; }

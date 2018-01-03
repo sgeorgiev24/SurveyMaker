@@ -32,6 +32,14 @@
             this.db.SaveChanges();
         }
 
+        public void Delete(int id)
+        {
+            var poll = this.db.Polls.Find(id);
+
+            this.db.Remove(poll);
+            this.db.SaveChanges();
+        }
+
         public void Edit(int pollId, string name, string description)
         {
             var poll = db.Polls.Find(pollId);

@@ -10,6 +10,8 @@
             string description, 
             string authorId);
 
+        void Delete(int id);
+
         IEnumerable<PollListingServiceModel> PollsByUserId(string userId);
 
         void Edit(

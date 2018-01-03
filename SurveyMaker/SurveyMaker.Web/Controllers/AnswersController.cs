@@ -34,18 +34,5 @@
 
             return RedirectToAction(nameof(QuestionsController.Edit), "Questions", new { id = int.Parse(questionId) });
         }
-
-        [HttpPost]
-        public IActionResult DeleteConfirmed(int id, string returnUrl)
-        {
-            if (!this.answers.AnswerExist(id))
-            {
-                return NotFound();
-            }
-
-            this.answers.Delete(id);
-
-            return RedirectToAction(nameof(QuestionsController.Edit), "Questions", new { id = 2 });
-        }
     }
 }

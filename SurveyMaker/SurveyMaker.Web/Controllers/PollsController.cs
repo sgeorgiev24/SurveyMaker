@@ -13,8 +13,6 @@
     [Authorize]
     public class PollsController : Controller
     {
-        // TODO: Delete Poll
-
         private readonly IPollService polls;
         private readonly UserManager<User> userManager;
 
@@ -59,6 +57,19 @@
             var model = this.polls.GetPollDetails(id);
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            if (!this.polls.PollExist(id))
+            {
+                return NotFound();
+            }
+
+            this.polls.Delete(id);
+
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
