@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services;
+    using Web.Infrastructure.Extensions;
 
     [Authorize]
     public class AnswersController : Controller
@@ -30,7 +31,9 @@
                 return BadRequest();
             }
 
-            this.answers.Delete(id);
+            this.answers.DeleteAsync(id);
+
+            TempData.AddSuccessMessage("Answer deleted.");
 
             return RedirectToAction(nameof(QuestionsController.Edit), "Questions", new { id = int.Parse(questionId) });
         }

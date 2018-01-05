@@ -2,6 +2,7 @@
 {
     using Data;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class AnswerService : IAnswerService
     {
@@ -15,12 +16,13 @@
         public bool AnswerExist(int id)
             => this.db.AnswerOptions.Any(ao => ao.Id == id);
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var answerOption = this.db.AnswerOptions.Find(id);
+            var answerOption = await this.db.AnswerOptions.FindAsync(id);
+
             
             this.db.Remove(answerOption);
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
     }
 }

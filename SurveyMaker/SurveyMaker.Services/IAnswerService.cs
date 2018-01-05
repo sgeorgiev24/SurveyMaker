@@ -1,8 +1,10 @@
 ﻿namespace SurveyMaker.Services
 {
+    using System.Threading.Tasks;
+
     public interface IAnswerService
     {
-        void Delete(int id);
+        Task DeleteAsync(int id);
 
         bool AnswerExist(int id);
     }
