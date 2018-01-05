@@ -8,6 +8,7 @@
     using Services.Models.Question;
     using SurveyMaker.Web.Infrastructure.Extensions;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     [Authorize]
     public class QuestionsController : Controller
@@ -24,9 +25,11 @@
 
         [HttpPost]
         [ValidateModelState]
-        public IActionResult Create([FromQuery]int pollId, CreateQuestionFormViewModel model)
+        public async Task<IActionResult> Create([FromQuery]int pollId, CreateQuestionFormViewModel model)
         {
-            this.questions.Create(pollId, model.Title, model.AnswerOptions);
+            await this.questions.CreateAsync(pollId, model.Title, model.AnswerOptions);
+
+            TempData.AddSuccessMessage($"Question \"{model.Title}\" created.");
 
             return RedirectToAction(nameof(PollsController.Edit), "Polls", new { id = pollId });
         }
@@ -40,7 +43,7 @@
             }
 
             this.questions.Delete(id);
-            
+
             TempData.AddSuccessMessage("Question deleted.");
 
             return RedirectToAction(nameof(PollsController.Edit), "Polls", new { id = int.Parse(pollId) });

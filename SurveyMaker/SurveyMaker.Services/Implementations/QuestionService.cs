@@ -6,6 +6,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using SurveyMaker.Services.Models.Question;
+    using System.Threading.Tasks;
 
     public class QuestionService : IQuestionService
     {
@@ -22,7 +23,7 @@
                 .ToList()
                 .Count;
 
-        public void Create(
+        public async Task CreateAsync(
             int pollId, 
             string title, 
             IEnumerable<string> answerOptions)
@@ -32,7 +33,7 @@
                 Title = title,
                 PollId = pollId
             };
-            this.db.Add(question);
+            await this.db.AddAsync(question);
 
             var allAnswerOptions = new List<AnswerOption>();
 
@@ -44,12 +45,12 @@
                     Text = answerOption
                 };
 
-                this.db.Add(answerOptionDb);
+                await this.db.AddAsync(answerOptionDb);
 
                 allAnswerOptions.Add(answerOptionDb);
             }
 
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
 
         public void Delete(int id)

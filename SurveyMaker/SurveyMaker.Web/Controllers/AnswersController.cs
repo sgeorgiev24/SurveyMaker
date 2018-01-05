@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services;
+    using System.Threading.Tasks;
     using Web.Infrastructure.Extensions;
 
     [Authorize]
@@ -20,7 +21,7 @@
         }
 
         [HttpGet]
-        public IActionResult Delete(int id, string questionId, string pollId)
+        public async Task<IActionResult> Delete(int id, string questionId, string pollId)
         {
             if (!this.answers.AnswerExist(id))
             {
@@ -31,7 +32,7 @@
                 return BadRequest();
             }
 
-            this.answers.DeleteAsync(id);
+            await this.answers.DeleteAsync(id);
 
             TempData.AddSuccessMessage("Answer deleted.");
 

@@ -2,10 +2,11 @@
 {
     using Services.Models.Question;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IQuestionService
     {
-        void Create(
+        Task CreateAsync(
             int pollId,
             string title,
             IEnumerable<string> answerOptions);
