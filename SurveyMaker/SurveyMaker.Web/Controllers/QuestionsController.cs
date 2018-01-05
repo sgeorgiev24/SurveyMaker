@@ -50,14 +50,14 @@
         }
         
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (!this.questions.QuestionExist(id))
             {
                 return NotFound();
             }
 
-            var model = this.questions.QuestionById(id);
+            var model = await this.questions.QuestionByIdAsync(id);
 
             return View(model);
         }

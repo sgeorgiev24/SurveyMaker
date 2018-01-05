@@ -15,7 +15,7 @@
 
         bool QuestionExist(int id);
 
-        QuestionFormServiceModel QuestionById(int id);
+        Task<QuestionFormServiceModel> QuestionByIdAsync(int id);
 
         void Edit(int questionId,
             string title,

@@ -7,6 +7,7 @@
     using System.Linq;
     using SurveyMaker.Services.Models.Question;
     using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
 
     public class QuestionService : IQuestionService
     {
@@ -94,11 +95,11 @@
             this.db.SaveChanges();
         }
 
-        public QuestionFormServiceModel QuestionById(int id)
-            => this.db.Questions
+        public async Task<QuestionFormServiceModel> QuestionByIdAsync(int id)
+            => await this.db.Questions
                 .Where(q => q.Id == id)
                 .ProjectTo<QuestionFormServiceModel>()
-                .FirstOrDefault();
+                .SingleOrDefaultAsync();
 
         public bool QuestionExist(int id)
             => this.db.Questions.Any(q => q.Id == id);
