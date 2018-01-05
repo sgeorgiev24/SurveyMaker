@@ -23,7 +23,7 @@
         [HttpGet]
         public async Task<IActionResult> Delete(int id, string questionId, string pollId)
         {
-            if (!this.answers.AnswerExist(id))
+            if (!await this.answers.AnswerExistAsync(id))
             {
                 return NotFound();
             }

@@ -1,6 +1,7 @@
 ﻿namespace SurveyMaker.Services.Implementations
 {
     using Data;
+    using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -13,8 +14,8 @@
             this.db = db;
         }
 
-        public bool AnswerExist(int id)
-            => this.db.AnswerOptions.Any(ao => ao.Id == id);
+        public async Task<bool> AnswerExistAsync(int id)
+            => await this.db.AnswerOptions.AnyAsync(ao => ao.Id == id);
 
         public async Task DeleteAsync(int id)
         {

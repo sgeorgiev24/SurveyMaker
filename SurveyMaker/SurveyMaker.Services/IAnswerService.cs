@@ -6,6 +6,6 @@
     {
         Task DeleteAsync(int id);
 
-        bool AnswerExist(int id);
+        Task<bool> AnswerExistAsync(int id);
     }
 }
