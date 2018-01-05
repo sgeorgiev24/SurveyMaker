@@ -37,7 +37,7 @@
         [HttpGet]
         public async Task<IActionResult> Delete(int id, string pollId)
         {
-            if (!this.questions.QuestionExist(id))
+            if (!await this.questions.QuestionExistAsync(id))
             {
                 return NotFound();
             }
@@ -52,7 +52,7 @@
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            if (!this.questions.QuestionExist(id))
+            if (!await this.questions.QuestionExistAsync(id))
             {
                 return NotFound();
             }

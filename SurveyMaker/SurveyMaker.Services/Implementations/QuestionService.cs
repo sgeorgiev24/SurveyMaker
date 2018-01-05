@@ -101,7 +101,7 @@
                 .ProjectTo<QuestionFormServiceModel>()
                 .SingleOrDefaultAsync();
 
-        public bool QuestionExist(int id)
-            => this.db.Questions.Any(q => q.Id == id);
+        public async Task<bool> QuestionExistAsync(int id)
+            => await this.db.Questions.AnyAsync(q => q.Id == id);
     }
 }

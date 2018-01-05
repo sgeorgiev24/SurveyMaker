@@ -13,7 +13,7 @@
 
         Task DeleteAsync(int id);
 
-        bool QuestionExist(int id);
+        Task<bool> QuestionExistAsync(int id);
 
         Task<QuestionFormServiceModel> QuestionByIdAsync(int id);
 
