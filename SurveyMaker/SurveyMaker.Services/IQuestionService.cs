@@ -22,6 +22,6 @@
             IEnumerable<string> answerOptions,
             IEnumerable<int> answerOptionsIds);
 
-        int AnswersCount(int id);
+        Task<int> AnswersCountAsync(int id);
     }
 }

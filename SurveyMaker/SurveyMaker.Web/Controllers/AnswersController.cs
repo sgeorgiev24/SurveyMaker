@@ -27,7 +27,7 @@
             {
                 return NotFound();
             }
-            if (this.questions.AnswersCount(int.Parse(questionId)) <= 2)
+            if (await this.questions.AnswersCountAsync(int.Parse(questionId)) <= 2)
             {
                 return BadRequest();
             }

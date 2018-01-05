@@ -18,11 +18,8 @@
             this.db = db;
         }
 
-        public int AnswersCount(int id)
-            => this.db.AnswerOptions
-                .Where(a => a.QuestionId == id)
-                .ToList()
-                .Count;
+        public async Task<int> AnswersCountAsync(int id)
+            => await this.db.AnswerOptions.CountAsync(ao => ao.QuestionId == id);
 
         public async Task CreateAsync(
             int pollId, 
