@@ -17,7 +17,7 @@
 
         Task<QuestionFormServiceModel> QuestionByIdAsync(int id);
 
-        void Edit(int questionId,
+        Task EditAsync(int questionId,
             string title,
             IEnumerable<string> answerOptions,
             IEnumerable<int> answerOptionsIds);

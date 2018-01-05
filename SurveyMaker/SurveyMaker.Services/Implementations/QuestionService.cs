@@ -62,9 +62,9 @@
             await this.db.SaveChangesAsync();
         }
 
-        public void Edit(int questionId, string title, IEnumerable<string> answerOptions, IEnumerable<int> answerOptionsIds)
+        public async Task EditAsync(int questionId, string title, IEnumerable<string> answerOptions, IEnumerable<int> answerOptionsIds)
         {
-            var question = this.db.Questions.Find(questionId);
+            var question = await this.db.Questions.FindAsync(questionId);
 
             question.Title = title;
 
@@ -72,14 +72,14 @@
 
             foreach (var answerId in answerOptionsIds)
             {
-                var answer = this.db.AnswerOptions.Find(answerId);
+                var answer = await this.db.AnswerOptions.FindAsync(answerId);
                 foreach (var answerText in answers.ToList())
                 {
                     answer.Text = answerText;
                     answers.Remove(answerText);
                     break;
                 }
-                this.db.SaveChanges();
+                await this.db.SaveChangesAsync();
             }
             foreach (var answer in answers)
             {
@@ -89,10 +89,10 @@
                     Text = answer
                 };
 
-                this.db.Add(answerOptionDb);
+                await this.db.AddAsync(answerOptionDb);
             }
 
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
 
         public async Task<QuestionFormServiceModel> QuestionByIdAsync(int id)

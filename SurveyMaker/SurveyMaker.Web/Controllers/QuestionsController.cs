@@ -64,9 +64,11 @@
         
         [HttpPost]
         [ValidateModelState]
-        public IActionResult Edit(int id, EditQuestionServiceModel model)
+        public async Task<IActionResult> Edit(int id, EditQuestionServiceModel model)
         {
-            this.questions.Edit(id, model.Title, model.AnswerOptions, model.AnswerOptionsIds);
+            await this.questions.EditAsync(id, model.Title, model.AnswerOptions, model.AnswerOptionsIds);
+
+            TempData.AddSuccessMessage($"Question \"{model.Title}\" edited.");
 
             return RedirectToAction(nameof(Edit),  new { id = model.Id });
         }
