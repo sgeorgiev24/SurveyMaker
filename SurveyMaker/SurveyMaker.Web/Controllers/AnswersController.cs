@@ -20,7 +20,7 @@
         }
 
         [HttpGet]
-        public IActionResult Delete(int id, string questionId)
+        public IActionResult Delete(int id, string questionId, string pollId)
         {
             if (!this.answers.AnswerExist(id))
             {
@@ -35,7 +35,11 @@
 
             TempData.AddSuccessMessage("Answer deleted.");
 
-            return RedirectToAction(nameof(QuestionsController.Edit), "Questions", new { id = int.Parse(questionId) });
+            if (string.IsNullOrEmpty(pollId))
+            {
+                return RedirectToAction(nameof(QuestionsController.Edit), "Questions", new { id = int.Parse(questionId) });
+            }
+            return RedirectToAction(nameof(PollsController.Edit), "Polls", new { id = int.Parse(pollId) });
         }
     }
 }

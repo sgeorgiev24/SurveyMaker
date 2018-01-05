@@ -19,7 +19,6 @@
         public async Task DeleteAsync(int id)
         {
             var answerOption = await this.db.AnswerOptions.FindAsync(id);
-
             
             this.db.Remove(answerOption);
             await this.db.SaveChangesAsync();

@@ -35,7 +35,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <a asp-controller="Answers" asp-action="Delete" asp-route-id="@answer.Id" asp-route-questionId="@question.Id" class="btn btn-primary">Yes, delete it.</a>
+                                <a asp-controller="Answers" asp-action="Delete" asp-route-id="@answer.Id" asp-route-questionId="@question.Id" asp-route-pollId="@Model.Id" class="btn btn-primary">Yes, delete it.</a>
                             </div>
                         </div>
                     </div>
