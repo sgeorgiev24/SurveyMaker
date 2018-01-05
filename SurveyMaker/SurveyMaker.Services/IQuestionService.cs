@@ -11,7 +11,7 @@
             string title,
             IEnumerable<string> answerOptions);
 
-        void Delete(int id);
+        Task DeleteAsync(int id);
 
         bool QuestionExist(int id);
 

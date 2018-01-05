@@ -35,14 +35,14 @@
         }
 
         [HttpGet]
-        public IActionResult Delete(int id, string pollId)
+        public async Task<IActionResult> Delete(int id, string pollId)
         {
             if (!this.questions.QuestionExist(id))
             {
                 return NotFound();
             }
 
-            this.questions.Delete(id);
+            await this.questions.DeleteAsync(id);
 
             TempData.AddSuccessMessage("Question deleted.");
 

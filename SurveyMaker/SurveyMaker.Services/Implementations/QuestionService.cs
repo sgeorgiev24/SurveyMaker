@@ -53,12 +53,12 @@
             await this.db.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var question = this.db.Questions.Find(id);
+            var question = await this.db.Questions.FindAsync(id);
 
             this.db.Remove(question);
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
 
         public void Edit(int questionId, string title, IEnumerable<string> answerOptions, IEnumerable<int> answerOptionsIds)
