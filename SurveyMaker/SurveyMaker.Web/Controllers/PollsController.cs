@@ -9,6 +9,8 @@
     using Services;
     using Services.Models.Poll;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Web.Infrastructure.Extensions;
 
     [Authorize]
     public class PollsController : Controller
@@ -29,12 +31,14 @@
 
         [HttpPost]
         [ValidateModelState]
-        public IActionResult Create(CreatePollFormViewModel model)
+        public async Task<IActionResult> Create(CreatePollFormViewModel model)
         {
             var userId = this.userManager.GetUserId(User);
 
-            this.polls.Create(model.Name, model.Description, userId);
-            
+            await this.polls.CreateAsync(model.Name, model.Description, userId);
+
+            TempData.AddSuccessMessage($"Survey \"{model.Name}\" created.");
+
             return RedirectToAction(nameof(All));
         }
 
@@ -48,67 +52,71 @@
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (!this.polls.PollExist(id))
+            if (!await this.polls.PollExistAsync(id))
             {
                 return NotFound();
             }
 
-            var model = this.polls.GetPollDetails(id);
+            var model = await this.polls.GetPollDetailsAsync(id);
 
             return View(model);
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (!this.polls.PollExist(id))
+            if (!await this.polls.PollExistAsync(id))
             {
                 return NotFound();
             }
 
-            this.polls.Delete(id);
+            await this.polls.DeleteAsync(id);
+
+            TempData.AddSuccessMessage("Survey deleted.");
 
             return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (!this.polls.PollExist(id))
+            if (!await this.polls.PollExistAsync(id))
             {
                 return NotFound();
             }
 
-            var model = this.polls.PollById(id);
+            var model = await this.polls.PollByIdAsync(id);
             
             return View(model);
         }
 
         [HttpPost]
         [ValidateModelState]
-        public IActionResult Edit(int id, PollFormServiceModel model)
+        public async Task<IActionResult> Edit(int id, PollFormServiceModel model)
         {
-            this.polls.Edit(id, model.Name, model.Description);
+            await this.polls.EditAsync(id, model.Name, model.Description);
 
-            return RedirectToAction(nameof(All));
+            TempData.AddSuccessMessage("Survey edited.");
+
+            return RedirectToAction(nameof(Edit), new { id = model.Id });
         }
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Complete(string urlToken)
+        public async Task<IActionResult> Complete(string urlToken)
         {
-            var model = this.polls.PollByUrlToken(urlToken);
+            var model = await this.polls.PollByUrlTokenAsync(urlToken);
 
             return View(model);
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Complete(int pollId, Dictionary<string, string> formData)
+        public async Task<IActionResult> Complete(int pollId, Dictionary<string, string> formData)
         {
-            this.polls.SaveDataFromPoll(pollId, formData);
+            await this.polls.SaveDataFromPollAsync(pollId, formData);
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }

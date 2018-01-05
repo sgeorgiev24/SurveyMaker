@@ -2,31 +2,32 @@
 {
     using SurveyMaker.Services.Models.Poll;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IPollService
     {
-        void Create(
+        Task CreateAsync(
             string name, 
             string description, 
             string authorId);
 
-        void Delete(int id);
+        Task DeleteAsync(int id);
 
         IEnumerable<PollListingServiceModel> PollsByUserId(string userId);
 
-        void Edit(
+        Task EditAsync(
             int pollId, 
             string name, 
             string description);
 
-        bool PollExist(int id);
+        Task<bool> PollExistAsync(int id);
 
-        PollFormServiceModel PollById(int id);
+        Task<PollFormServiceModel> PollByIdAsync(int id);
 
-        PollDetailsServiceModel GetPollDetails(int id);
+        Task<PollDetailsServiceModel> GetPollDetailsAsync(int id);
 
-        PollCompleteServiceModel PollByUrlToken(string urlToken);
+        Task<PollCompleteServiceModel> PollByUrlTokenAsync(string urlToken);
 
-        void SaveDataFromPoll(int pollId, Dictionary<string, string> formData);
+        Task SaveDataFromPollAsync(int pollId, Dictionary<string, string> formData);
     }
 }

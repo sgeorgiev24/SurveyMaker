@@ -3,10 +3,12 @@
     using AutoMapper.QueryableExtensions;
     using Data;
     using Data.Models;
+    using Microsoft.EntityFrameworkCore;
     using Services.Models.Poll;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class PollService : IPollService
     {
@@ -17,7 +19,7 @@
             this.db = db;
         }
 
-        public void Create(string name, string description, string authorId)
+        public async Task CreateAsync(string name, string description, string authorId)
         {
             var poll = new Poll
             {
@@ -28,26 +30,26 @@
 
             poll.UrlToken = Guid.NewGuid().ToString().Replace("-", string.Empty);
 
-            this.db.Add(poll);
-            this.db.SaveChanges();
+            await this.db.AddAsync(poll);
+            await this.db.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var poll = this.db.Polls.Find(id);
+            var poll = await this.db.Polls.FindAsync(id);
 
             this.db.Remove(poll);
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
 
-        public void Edit(int pollId, string name, string description)
+        public async Task EditAsync(int pollId, string name, string description)
         {
-            var poll = db.Polls.Find(pollId);
+            var poll = await db.Polls.FindAsync(pollId);
 
             poll.Name = name;
             poll.Description = description;
 
-            db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
 
         public IEnumerable<PollListingServiceModel> PollsByUserId(string userId)
@@ -57,36 +59,36 @@
                 .ProjectTo<PollListingServiceModel>()
                 .ToList();
 
-        public bool PollExist(int id)
-            => this.db.Polls.Any(p => p.Id == id);
+        public async Task<bool> PollExistAsync(int id)
+            => await this.db.Polls.AnyAsync(p => p.Id == id);
 
-        public PollFormServiceModel PollById(int id)
-            => this.db.Polls
+        public async Task<PollFormServiceModel> PollByIdAsync(int id)
+            => await this.db.Polls
                 .Where(p => p.Id == id)
                 .ProjectTo<PollFormServiceModel>()
-                .FirstOrDefault();
+                .SingleOrDefaultAsync();
 
-        public PollDetailsServiceModel GetPollDetails(int id)
-            => this.db.Polls
+        public async Task<PollDetailsServiceModel> GetPollDetailsAsync(int id)
+            => await this.db.Polls
                 .Where(p => p.Id == id)
                 .ProjectTo<PollDetailsServiceModel>()
-                .FirstOrDefault();
+                .SingleOrDefaultAsync();
 
-        public PollCompleteServiceModel PollByUrlToken(string urlToken)
-            => this.db.Polls
+        public async Task<PollCompleteServiceModel> PollByUrlTokenAsync(string urlToken)
+            => await this.db.Polls
                 .Where(p => p.UrlToken == urlToken)
                 .ProjectTo<PollCompleteServiceModel>()
-                .FirstOrDefault();
+                .SingleOrDefaultAsync();
 
-        public void SaveDataFromPoll(int pollId, Dictionary<string, string> formData)
+        public async Task SaveDataFromPollAsync(int pollId, Dictionary<string, string> formData)
         {
             var answersIds = new List<int>();
 
-            var poll = this.db
+            var poll = await this.db
                 .Polls
-                .Find(pollId);
+                .FindAsync(pollId);
 
-            var pollQuestions = this.db
+            var pollQuestions = await this.db
                 .Questions
                 .Where(q => q.PollId == poll.Id)
                 .Select(q => new Question
@@ -94,7 +96,7 @@
                     Id = q.Id,
                     Title = q.Title
                 })
-                .ToList();
+                .ToListAsync();
 
             foreach (var data in formData)
             {
@@ -108,10 +110,10 @@
             poll.UsersCompleted++;
             foreach (var id in answersIds)
             {
-                var answerOption = this.db.AnswerOptions.Find(id);
+                var answerOption = await this.db.AnswerOptions.FindAsync(id);
                 answerOption.Votes++;
             }
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
     }
 }
