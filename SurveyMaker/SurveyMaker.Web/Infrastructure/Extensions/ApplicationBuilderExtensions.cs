@@ -8,6 +8,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using System.Threading.Tasks;
 
+    using static WebConstants;
+
     public static class ApplicationBuilderExtensions
     {
         public static IApplicationBuilder UseDatabaseMigration(this IApplicationBuilder app)
@@ -22,7 +24,7 @@
                 Task
                     .Run(async () =>
                     {
-                        var adminName = WebConstants.AdministratorRole;
+                        var adminName = AdministratorRole;
 
                         var roles = new[]
                         {
@@ -42,7 +44,7 @@
                             }
                         }
 
-                        var adminEmail = "admin@admin.com";
+                        var adminEmail = AdminEmail;
                         var adminUser = await userManager.FindByEmailAsync(adminEmail);
 
                         if (adminUser == null)
@@ -52,7 +54,7 @@
                                 Email = adminEmail,
                                 UserName = adminName
                             };
-                            await userManager.CreateAsync(adminUser, "admin12");
+                            await userManager.CreateAsync(adminUser, AdminPassword);
                             await userManager.AddToRoleAsync(adminUser, adminName);
                         }
                     })
