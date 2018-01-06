@@ -52,12 +52,12 @@
             await this.db.SaveChangesAsync();
         }
 
-        public IEnumerable<PollListingServiceModel> PollsByUserId(string userId)
-            => this.db.Polls
+        public async Task<IEnumerable<PollListingServiceModel>> PollsByUserIdAsync(string userId)
+            => await this.db.Polls
                 .OrderByDescending(p => p.Id)
                 .Where(p => p.AuthorId == userId)
                 .ProjectTo<PollListingServiceModel>()
-                .ToList();
+                .ToListAsync();
 
         public async Task<bool> PollExistAsync(int id)
             => await this.db.Polls.AnyAsync(p => p.Id == id);

@@ -20,6 +20,8 @@
         [MaxLength(PollDescriptionMaxLength)]
         public string Description { get; set; }
 
+        public string AuthorId { get; set; }
+
         public IEnumerable<ListingQuestionsServiceModel> Questions { get; set; }
     }
 }

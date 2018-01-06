@@ -12,6 +12,8 @@
         public string Description { get; set; }
         
         public string UrlToken { get; set; }
+
+        public string AuthorId { get; set; }
         
         public int UsersCompleted { get; set; }
 

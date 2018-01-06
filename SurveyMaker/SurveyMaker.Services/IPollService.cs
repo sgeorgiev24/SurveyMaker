@@ -13,7 +13,7 @@
 
         Task DeleteAsync(int id);
 
-        IEnumerable<PollListingServiceModel> PollsByUserId(string userId);
+        Task<IEnumerable<PollListingServiceModel>> PollsByUserIdAsync(string userId);
 
         Task EditAsync(
             int pollId, 

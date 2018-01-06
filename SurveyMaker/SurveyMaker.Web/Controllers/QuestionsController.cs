@@ -14,10 +14,14 @@
     public class QuestionsController : Controller
     {
         private readonly IQuestionService questions;
+        private readonly IUserService users;
 
-        public QuestionsController(IQuestionService questions)
+        public QuestionsController(
+            IQuestionService questions,
+            IUserService users)
         {
             this.questions = questions;
+            this.users = users;
         }
 
         [HttpGet]
@@ -34,8 +38,8 @@
             return RedirectToAction(nameof(PollsController.Edit), "Polls", new { id = pollId });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id, string pollId)
+        [HttpPost]
+        public async Task<IActionResult> Delete([FromForm]int id, [FromForm]string pollId)
         {
             if (!await this.questions.QuestionExistAsync(id))
             {
@@ -58,6 +62,11 @@
             }
 
             var model = await this.questions.QuestionByIdAsync(id);
+
+            if (!await this.users.HaveAccessAsync(model.AuthorId))
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
 
             return View(model);
         }

@@ -17,13 +17,16 @@
     {
         private readonly IPollService polls;
         private readonly UserManager<User> userManager;
+        private readonly IUserService users;
 
         public PollsController(
             IPollService polls,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            IUserService users)
         {
             this.polls = polls;
             this.userManager = userManager;
+            this.users = users;
         }
 
         [HttpGet]
@@ -43,11 +46,11 @@
         }
 
         [HttpGet]
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
-            var userId = this.userManager.GetUserId(User);
-            var model = this.polls.PollsByUserId(userId);
-
+            var user = await this.userManager.GetUserAsync(HttpContext.User);
+            var model = await this.polls.PollsByUserIdAsync(user.Id);
+                
             return View(model);
         }
 
@@ -61,12 +64,19 @@
 
             var model = await this.polls.GetPollDetailsAsync(id);
 
+            if (!await this.users.HaveAccessAsync(model.AuthorId))
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+
             return View(model);
         }
-
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        
+        [HttpPost]
+        public async Task<IActionResult> Delete([FromForm]int id)
         {
+            var currentUser = await this.userManager.GetUserAsync(HttpContext.User);
+
             if (!await this.polls.PollExistAsync(id))
             {
                 return NotFound();
@@ -76,19 +86,29 @@
 
             TempData.AddSuccessMessage("Survey deleted.");
 
+            if (await this.userManager.IsInRoleAsync(currentUser, WebConstants.AdministratorRole))
+            {
+                return RedirectToAction("Index", "Polls", new { area = "Admin"});
+            }
+
             return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
-        {
+        {            
             if (!await this.polls.PollExistAsync(id))
             {
                 return NotFound();
             }
             
             var model = await this.polls.PollByIdAsync(id);
-            
+
+            if (!await this.users.HaveAccessAsync(model.AuthorId))
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+
             return View(model);
         }
 

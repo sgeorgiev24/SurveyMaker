@@ -50,7 +50,13 @@
                     </div>
                 </div>
 
-                <div class="modal fade" id="modal-@answerOption.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div 
+                    class="modal fade" 
+                    id="modal-@answerOption.Id" 
+                    tabindex="-1" 
+                    role="dialog" 
+                    aria-labelledby="exampleModalLabel" 
+                    aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -64,7 +70,15 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <a asp-controller="Answers" asp-action="Delete" asp-route-id="@answerOption.Id" asp-route-questionId="@Model.Id" class="btn btn-primary">Yes, delete it.</a>
+
+                                <a 
+                                   asp-controller="Answers" 
+                                   asp-action="Delete" 
+                                   asp-route-id="@answerOption.Id" 
+                                   asp-route-questionId="@Model.Id" 
+                                   class="btn btn-primary">
+                                    Yes, delete it.
+                                </a>
                             </div>
                         </div>
                     </div>

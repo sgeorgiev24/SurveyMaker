@@ -49,7 +49,10 @@
                     <a asp-area="" asp-controller="Polls" asp-action="Edit" asp-route-id="@poll.Id" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
-                    Delete
+                    <form method="post" asp-area="" asp-controller="Polls" asp-action="Delete">
+                        <input type="hidden" name="id" value="@poll.Id" />
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </form>
                 </td>
             </tr>
         }

@@ -35,6 +35,12 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <form method="post" asp-controller="Answers" asp-action="Delete">
+                                    <input type="hidden" name="id" value="@answer.Id" />
+                                    <input type="hidden" name="questionId" value="@question.Id" />
+                                    <input type="hidden" name="pollId" value="@Model.Id" />
+                                    <input type="submit" value="Yes, delete it." class="btn btn-primary" />
+                                </form>
                                 <a asp-controller="Answers" asp-action="Delete" asp-route-id="@answer.Id" asp-route-questionId="@question.Id" asp-route-pollId="@Model.Id" class="btn btn-primary">Yes, delete it.</a>
                             </div>
                         </div>
@@ -63,6 +69,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <form method="post" asp-controller="Questions" asp-action="Delete">
+                        <input type="hidden" name="id" value="@question.Id" />
+                        <input type="hidden" name="pollId" value="@Model.Id" />
+                        <input type="submit" value="Yes, delete it." class="btn btn-primary" />
+                    </form>
                     <a asp-controller="Questions" asp-action="Delete" asp-route-id="@question.Id" asp-route-pollId="@Model.Id" class="btn btn-primary">Yes, delete it.</a>
                 </div>
             </div>
