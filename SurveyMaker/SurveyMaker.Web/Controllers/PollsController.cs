@@ -86,7 +86,7 @@
             {
                 return NotFound();
             }
-
+            
             var model = await this.polls.PollByIdAsync(id);
             
             return View(model);

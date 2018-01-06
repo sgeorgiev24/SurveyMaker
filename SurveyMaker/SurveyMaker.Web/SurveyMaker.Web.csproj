@@ -27,4 +27,8 @@
     <ProjectReference Include="..\SurveyMaker.Services\SurveyMaker.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Models\Poll\" />
+  </ItemGroup>
+
 </Project>
