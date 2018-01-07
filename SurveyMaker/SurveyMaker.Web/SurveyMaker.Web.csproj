@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-SurveyMaker.Web-3C5B5D92-D949-4FE8-80C9-1877524DC1DA</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Properties\PublishProfiles\SurveyMakerWeb - Web Deploy.pubxml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.2" />
@@ -29,6 +33,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\Poll\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>
