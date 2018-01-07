@@ -34,14 +34,13 @@
                                 <p>Are you sure you want to delete this answer option?</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <form method="post" asp-controller="Answers" asp-action="Delete">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     <input type="hidden" name="id" value="@answer.Id" />
                                     <input type="hidden" name="questionId" value="@question.Id" />
                                     <input type="hidden" name="pollId" value="@Model.Id" />
                                     <input type="submit" value="Yes, delete it." class="btn btn-primary" />
                                 </form>
-                                <a asp-controller="Answers" asp-action="Delete" asp-route-id="@answer.Id" asp-route-questionId="@question.Id" asp-route-pollId="@Model.Id" class="btn btn-primary">Yes, delete it.</a>
                             </div>
                         </div>
                     </div>
@@ -55,12 +54,29 @@
     <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#modal-@question.Id">Delete Question</a>
     <hr />
 
-    <div class="modal fade" id="modal-@question.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div 
+        class="modal fade" 
+        id="modal-@question.Id" 
+        tabindex="-1" 
+        role="dialog" 
+        aria-labelledby="exampleModalLabel" 
+        aria-hidden="true">
+
         <div class="modal-dialog" role="document">  
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">Delete question "@question.Title"...</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h3 
+                        class="modal-title" 
+                        id="exampleModalLabel">
+                        
+                        Delete question "@question.Title"...
+                    </h3>
+                    <button 
+                        type="button" 
+                        class="close" 
+                        data-dismiss="modal" 
+                        aria-label="Close">
+
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -68,13 +84,12 @@
                     <p>Are you sure you want to delete this question?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <form method="post" asp-controller="Questions" asp-action="Delete">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <input type="hidden" name="id" value="@question.Id" />
                         <input type="hidden" name="pollId" value="@Model.Id" />
                         <input type="submit" value="Yes, delete it." class="btn btn-primary" />
                     </form>
-                    <a asp-controller="Questions" asp-action="Delete" asp-route-id="@question.Id" asp-route-pollId="@Model.Id" class="btn btn-primary">Yes, delete it.</a>
                 </div>
             </div>
         </div>

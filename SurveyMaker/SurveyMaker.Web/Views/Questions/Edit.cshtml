@@ -57,11 +57,22 @@
                     role="dialog" 
                     aria-labelledby="exampleModalLabel" 
                     aria-hidden="true">
+
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h3 class="modal-title" id="exampleModalLabel">Delete answer "@answerOption.Text"...</h3>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <h3 
+                                    class="modal-title" 
+                                    id="exampleModalLabel">
+
+                                    Delete answer "@answerOption.Text"...
+                                </h3>
+                                <button 
+                                    type="button" 
+                                    class="close" 
+                                    data-dismiss="modal" 
+                                    aria-label="Close">
+
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -70,15 +81,17 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <input 
+                                        type="submit" 
+                                        asp-controller="Answers" 
+                                        asp-action="Delete" 
+                                        asp-route-id="@answerOption.Id" 
+                                        asp-route-questionId="@Model.Id" 
+                                        value="Yes, delete it." 
+                                        class="btn btn-primary" />
 
-                                <a 
-                                   asp-controller="Answers" 
-                                   asp-action="Delete" 
-                                   asp-route-id="@answerOption.Id" 
-                                   asp-route-questionId="@Model.Id" 
-                                   class="btn btn-primary">
-                                    Yes, delete it.
-                                </a>
+                                    
+                                    
                             </div>
                         </div>
                     </div>

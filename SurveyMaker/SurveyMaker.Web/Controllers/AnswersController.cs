@@ -21,7 +21,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete([FromForm]int id, [FromForm]string questionId, [FromForm]string pollId)
+        public async Task<IActionResult> Delete(int id, string questionId, string pollId)
         {
             if (!await this.answers.AnswerExistAsync(id))
             {
