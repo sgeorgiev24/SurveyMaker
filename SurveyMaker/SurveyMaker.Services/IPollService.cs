@@ -13,7 +13,9 @@
 
         Task DeleteAsync(int id);
 
-        Task<IEnumerable<PollListingServiceModel>> PollsByUserIdAsync(string userId);
+        Task<IEnumerable<PollListingServiceModel>> PollsByUserIdAsync(string userId, string search);
+
+        Task<IEnumerable<PollListingServiceModel>> SearchInPollsByUserAsync(string userId, string search);
 
         Task EditAsync(
             int pollId, 

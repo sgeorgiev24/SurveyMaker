@@ -46,11 +46,11 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(string search)
         {
             var user = await this.userManager.GetUserAsync(HttpContext.User);
-            var model = await this.polls.PollsByUserIdAsync(user.Id);
-                
+            var model = await this.polls.PollsByUserIdAsync(user.Id, search);
+
             return View(model);
         }
 

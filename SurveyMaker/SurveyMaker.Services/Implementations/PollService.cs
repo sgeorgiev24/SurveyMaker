@@ -52,12 +52,16 @@
             await this.db.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<PollListingServiceModel>> PollsByUserIdAsync(string userId)
-            => await this.db.Polls
+        public async Task<IEnumerable<PollListingServiceModel>> PollsByUserIdAsync(string userId, string search)
+        {
+            search = search ?? string.Empty;
+
+            return await this.db.Polls
                 .OrderByDescending(p => p.Id)
-                .Where(p => p.AuthorId == userId)
+                .Where(p => p.AuthorId == userId && p.Name.ToLower().Contains(search.ToLower()))
                 .ProjectTo<PollListingServiceModel>()
                 .ToListAsync();
+        }
 
         public async Task<bool> PollExistAsync(int id)
             => await this.db.Polls.AnyAsync(p => p.Id == id);
@@ -115,5 +119,12 @@
             }
             await this.db.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<PollListingServiceModel>> SearchInPollsByUserAsync(string userId, string search)
+            => await this.db.Polls
+                .OrderByDescending(p => p.Id)
+                .Where(p => p.AuthorId == userId && p.Name.ToLower().Contains(search.ToLower()))
+                .ProjectTo<PollListingServiceModel>()
+                .ToListAsync();
     }
 }
