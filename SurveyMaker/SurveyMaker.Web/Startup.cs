@@ -12,6 +12,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Web.Infrastructure.Extensions;
 
+    using static WebConstants;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -22,7 +24,7 @@
         public IConfiguration Configuration { get; }
         
         public void ConfigureServices(IServiceCollection services)
-        {
+        {   
             services.AddDbContext<SurveyMakerDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -35,6 +37,12 @@
             })
                 .AddEntityFrameworkStores<SurveyMakerDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = FacebookAppId;
+                facebookOptions.AppSecret = FacebookAppSecret;
+            });
 
             services.AddRouting(options =>
             {

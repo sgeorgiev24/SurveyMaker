@@ -1,7 +1,5 @@
 ﻿namespace SurveyMaker.Web
 {
-    using static Administrator;
-
     public static class WebConstants
     {
         public const string AdministratorRole = Administrator.AdministratorRole;
@@ -12,5 +10,7 @@
 
         public const string SuccessMessage = "Success";
 
+        public const string FacebookAppId = Administrator.FacebookAppId;
+        public const string FacebookAppSecret = Administrator.FacebookAppSecret;
     }
 }
