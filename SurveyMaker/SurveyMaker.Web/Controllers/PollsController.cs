@@ -125,6 +125,15 @@
 
         [AllowAnonymous]
         [HttpGet]
+        public async Task<IActionResult> CompleteStart(string urlToken)
+        {
+            var model = await this.polls.PollByUrlTokenAsync(urlToken);
+
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> Complete(string urlToken)
         {
             var model = await this.polls.PollByUrlTokenAsync(urlToken);
@@ -138,7 +147,12 @@
         {
             await this.polls.SaveDataFromPollAsync(pollId, formData);
 
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(EndOfSurvey));
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult EndOfSurvey()
+            => View();
     }
 }

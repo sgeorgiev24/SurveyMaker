@@ -11,6 +11,8 @@
 
         public string Name { get; set; }
 
+        public string UrlToken { get; set; }
+
         public string Description { get; set; }
 
         public IEnumerable<QuestionFormServiceModel> Questions { get; set; }

@@ -30,7 +30,6 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Polls" asp-action="Create">Create Poll</a></li>
                     <li><a asp-area="" asp-controller="Polls" asp-action="All">My Polls</a></li>
                     @if (User.IsInRole(SurveyMaker.Web.WebConstants.AdministratorRole))

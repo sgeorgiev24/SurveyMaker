@@ -76,6 +76,15 @@
                 );
 
                 routes.MapRoute(
+                    name: "pollStart",
+                    template: "welcome/{urlToken}",
+                    defaults: new
+                    {
+                        controller = "Polls",
+                        action = "CompleteStart"
+                    });
+
+                routes.MapRoute(
                     name: "poll",
                     template: "{urlToken}",
                     defaults: new
