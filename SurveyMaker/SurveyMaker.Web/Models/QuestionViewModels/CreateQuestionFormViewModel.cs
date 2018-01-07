@@ -12,6 +12,7 @@
         [MaxLength(QuestionTitleMaxLength)]
         public string Title { get; set; }
 
+        [Required]
         [Display(Name = "Answer Option")]
         public IEnumerable<string> AnswerOptions { get; set; }
     }

@@ -12,5 +12,16 @@
 
         public const string FacebookAppId = Administrator.FacebookAppId;
         public const string FacebookAppSecret = Administrator.FacebookAppSecret;
+
+        public const string ContactSubject = "sgeorgiev24@gmail.com";
+        public const int ContactNameMinLength = 3;
+        public const int ContactNameMaxLength = 50;
+        public const int ContactMessageMinLength = 10;
+        public const int ContactMessageMaxLength = 500;
+        public const int ContactSubjectMinLength = 5;
+        public const int ContactSubjectMaxLength = 25;
+
+        public const string ContactCredentialsEmail = Administrator.ContactCredentialsEmail;
+        public const string ContactCredentialsPassword = Administrator.ContactCredentialsPassword;
     }
 }

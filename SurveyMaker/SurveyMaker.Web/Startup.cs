@@ -84,6 +84,10 @@
                 );
 
                 routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
                     name: "pollStart",
                     template: "welcome/{urlToken}",
                     defaults: new
@@ -100,10 +104,6 @@
                         controller = "Polls",
                         action = "Complete"
                     });
-
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

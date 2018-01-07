@@ -18,17 +18,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="AnswerOptions"></label>
-                <input asp-for="AnswerOptions" class="form-control"/>
+                <input asp-for="AnswerOptions" class="form-control answerOption"/>
                 <span asp-validation-for="AnswerOptions" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AnswerOptions"></label>
-                <input asp-for="AnswerOptions" class="form-control" />
+                <input asp-for="AnswerOptions" class="form-control answerOption" />
                 <span asp-validation-for="AnswerOptions" class="text-danger"></span>
             </div>
 
             <span class="btn btn-default addAnswerOption">Add answer option</span>
-            <button type="submit" class="btn btn-primary">Create Question</button>
+            
+            <button type="submit" class="btn btn-primary submit">Create Question</button>
         </form>
     </div>
 </div>
@@ -44,6 +45,23 @@
             </div>`;
 
         $(document).ready(function () {
+            $('input:text').keyup(function () {
+                var answers = $('.answerOption');
+                for (var i = 0; i < answers.length; i++) {
+                    var count = 0;
+                    if (answers[i].value == "") {
+                        count++;
+                        console.log(count);
+                    }
+                }
+                if (count > 0) {
+                    console.log("disabled");
+                    $('.submit').attr('disabled', true);
+                } else {
+                    $('.submit').attr('disabled', false);
+                }
+            });
+
             $('.addAnswerOption').on('click', function () {
                 $(this).before(@Html.Raw("answerOption"));
             })

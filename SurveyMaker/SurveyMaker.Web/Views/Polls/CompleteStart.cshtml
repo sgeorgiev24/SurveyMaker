@@ -1,7 +1,15 @@
 ﻿@model PollCompleteServiceModel
 
-
-    <h2>@Model.Name</h2>
-    <h3>@Model.Description</h3>
-
-    <a href="/@Model.UrlToken" class="btn btn-default">Start survey</a>
+@{
+    ViewData["Title"] = Model.Name;
+    Layout = "_CompleteLayout";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <h2 class="text-center">@Model.Name</h2>
+        <h4 class="text-center text-info">@Model.Description</h4>
+        <br />
+        <a href="/@Model.UrlToken" class="btn btn-default" style="margin:auto;display:table">Start survey</a>
+        <br />
+    </div>
+</div>

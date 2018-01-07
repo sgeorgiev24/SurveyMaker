@@ -25,6 +25,9 @@
                 Edit
             </th>
             <th>
+                Details
+            </th>
+            <th>
                 Delete
             </th>
         </tr>
@@ -47,6 +50,9 @@
                 </td>
                 <td>
                     <a asp-area="" asp-controller="Polls" asp-action="Edit" asp-route-id="@poll.Id" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <a asp-area="" asp-controller="Polls" asp-action="Details" asp-route-id="@poll.Id" class="btn btn-primary">Details</a>
                 </td>
                 <td>
                     <form method="post" asp-area="" asp-controller="Polls" asp-action="Delete">

@@ -24,7 +24,14 @@
 
                         <div class="input-group">
                             <div class="input-group">
-                                <input type="text" style="width: 320px" class="form-control" id="AnswerOptions" name="AnswerOptions" value="@answerOption.Text" maxlength="50">
+                                <input 
+                                    type="text" 
+                                    style="width: 320px" 
+                                    class="form-control answerOption" 
+                                    id="AnswerOptions" 
+                                    name="AnswerOptions" 
+                                    value="@answerOption.Text" 
+                                    maxlength="50">
 
                                 <span class="input-group-btn">
                                     @if (Model.AnswerOptions.Count > 2)
@@ -97,7 +104,7 @@
             }
 
             <span class="btn btn-default addAnswerOption">Add answer option</span>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary save">Save changes</button>
         </form>
     </div>
 </div>
@@ -118,6 +125,23 @@
             $('.addAnswerOption').on('click', function () {
                 $(this).before(@Html.Raw("answerOption"));
             })
+            
+            $('input:text').keyup(function () {
+                var answers = $('.answerOption');
+                for (var i = 0; i < answers.length; i++) {
+                    var count = 0;
+                    if (answers[i].value == "") {
+                        count++;
+                        console.log(count);
+                    }
+                }
+                if (count > 0) {
+                    console.log("disabled");
+                    $('.save').attr('disabled', true);
+                } else {
+                    $('.save').attr('disabled', false);
+                }
+            });
         });
     </script>
 }

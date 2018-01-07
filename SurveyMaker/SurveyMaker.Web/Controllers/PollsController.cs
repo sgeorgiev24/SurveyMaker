@@ -129,6 +129,11 @@
         {
             var model = await this.polls.PollByUrlTokenAsync(urlToken);
 
+            if (model == null)
+            {
+                return NotFound();
+            }
+
             return View(model);
         }
 
@@ -137,6 +142,11 @@
         public async Task<IActionResult> Complete(string urlToken)
         {
             var model = await this.polls.PollByUrlTokenAsync(urlToken);
+
+            if (model == null)
+            {
+                return NotFound();
+            }
 
             return View(model);
         }

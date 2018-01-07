@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - Survey Maker</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-readable.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
@@ -17,7 +17,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar  navbar-fixed-top navbar-default">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -32,6 +32,7 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Polls" asp-action="Create">Create Poll</a></li>
                     <li><a asp-area="" asp-controller="Polls" asp-action="All">My Polls</a></li>
+                    <li><a asp-area="" asp-controller="Contact" asp-action="Index">Contact us</a></li>
                     @if (User.IsInRole(SurveyMaker.Web.WebConstants.AdministratorRole))
                     {
                         <li class="dropdown">
