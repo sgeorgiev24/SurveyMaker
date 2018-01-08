@@ -2,7 +2,6 @@
 {
     using Data;
     using Microsoft.EntityFrameworkCore;
-    using System.Linq;
     using System.Threading.Tasks;
 
     public class AnswerService : IAnswerService
@@ -15,7 +14,9 @@
         }
 
         public async Task<bool> AnswerExistAsync(int id)
-            => await this.db.AnswerOptions.AnyAsync(ao => ao.Id == id);
+            => await this.db
+                .AnswerOptions
+                .AnyAsync(ao => ao.Id == id);
 
         public async Task DeleteAsync(int id)
         {

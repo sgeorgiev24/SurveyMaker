@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyMaker.Web", "SurveyMaker.Web\SurveyMaker.Web.csproj", "{BF2C2C17-E628-4DBF-9881-EB058262C830}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyMaker.Web", "SurveyMaker.Web\SurveyMaker.Web.csproj", "{BF2C2C17-E628-4DBF-9881-EB058262C830}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyMaker.Services", "SurveyMaker.Services\SurveyMaker.Services.csproj", "{2DF16FB8-80A2-4184-A4D6-885FD0D07DE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyMaker.Services", "SurveyMaker.Services\SurveyMaker.Services.csproj", "{2DF16FB8-80A2-4184-A4D6-885FD0D07DE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyMaker.Data", "SurveyMaker.Data\SurveyMaker.Data.csproj", "{FDC260E2-A912-422B-82A3-B7B4CC7A0482}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyMaker.Data", "SurveyMaker.Data\SurveyMaker.Data.csproj", "{FDC260E2-A912-422B-82A3-B7B4CC7A0482}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyMaker.Common", "SurveyMaker.Common\SurveyMaker.Common.csproj", "{07E32DA5-9829-46DC-90B2-92E796D2E7A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyMaker.Common", "SurveyMaker.Common\SurveyMaker.Common.csproj", "{07E32DA5-9829-46DC-90B2-92E796D2E7A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyMaker.Test", "SurveyMaker.Test\SurveyMaker.Test.csproj", "{A94014E8-C390-4E1F-B02F-94780D40167B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{07E32DA5-9829-46DC-90B2-92E796D2E7A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07E32DA5-9829-46DC-90B2-92E796D2E7A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07E32DA5-9829-46DC-90B2-92E796D2E7A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A94014E8-C390-4E1F-B02F-94780D40167B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A94014E8-C390-4E1F-B02F-94780D40167B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A94014E8-C390-4E1F-B02F-94780D40167B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A94014E8-C390-4E1F-B02F-94780D40167B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

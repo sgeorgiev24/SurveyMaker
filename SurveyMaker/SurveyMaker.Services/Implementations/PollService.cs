@@ -119,12 +119,5 @@
             }
             await this.db.SaveChangesAsync();
         }
-
-        public async Task<IEnumerable<PollListingServiceModel>> SearchInPollsByUserAsync(string userId, string search)
-            => await this.db.Polls
-                .OrderByDescending(p => p.Id)
-                .Where(p => p.AuthorId == userId && p.Name.ToLower().Contains(search.ToLower()))
-                .ProjectTo<PollListingServiceModel>()
-                .ToListAsync();
     }
 }
