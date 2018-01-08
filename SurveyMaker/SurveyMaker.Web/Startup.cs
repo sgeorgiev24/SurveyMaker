@@ -69,6 +69,7 @@
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseDeveloperExceptionPage();
 
             app.UseStaticFiles();
 
