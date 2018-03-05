@@ -3,31 +3,45 @@
 @{
     ViewData["Title"] = $"All polls created by user { User.Identity.Name }";
 }
-<h2>@ViewData["Title"]</h2>
 
-<div class="row">
+<div id="container">
+    <h2>@ViewData["Title"]</h2>
 
-    <form method="get">
-        <div class="col-md-8">
-            <input type="text" class="form-control" name="search" value="@Context.Request.Query["search"]" />
-        </div>
-        <div class="col-md-4">
-            <input type="submit" value="Search" class="btn btn-primary" />
-        </div>
-    </form>
-    @foreach (var poll in Model)
-    {
-        <div class="col-sm-6">
-            <div class="card pollListing">
-                <div class="card-block">
-                    <span>@poll.QuestionsCount questions</span>
-                    <h3 class="card-title">@poll.Name</h3>
-                    <p class="card-text">@poll.Description</p>
-                    <a asp-area="" asp-controller="Polls" asp-action="Edit" asp-route-id="@poll.Id" class="btn btn-primary">Edit</a>
+    <div class="row">
 
-                    <a asp-area="" asp-controller="Polls" asp-action="Details" asp-route-id="@poll.Id" class="btn btn-primary">Details</a>
+        <form data-ajax="true"
+              data-ajax-method="get"
+              data-ajax-mode="replace"
+              data-ajax-update="#container"
+              data-ajax-begin="onBegin" >
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="search" value="@Context.Request.Query["search"]" />
+            </div>
+            <div class="col-md-4">
+                <input type="submit" value="Search" class="btn btn-primary" id="search" />
+            </div>
+        </form>
+
+        @foreach (var poll in Model)
+        {
+            <div class="col-sm-6">
+                <div class="card pollListing">
+                    <div class="card-block">
+                        <span>@poll.QuestionsCount questions</span>
+                        <h3 class="card-title">@poll.Name</h3>
+                        <p class="card-text">@poll.Description</p>
+                        <a asp-area="" asp-controller="Polls" asp-action="Edit" asp-route-id="@poll.Id" class="btn btn-primary">Edit</a>
+
+                        <a asp-area="" asp-controller="Polls" asp-action="Details" asp-route-id="@poll.Id" class="btn btn-primary">Details</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
+
+<script>
+    var onBegin = function () {
+        $("#search").attr('disabled', true);
+    };
+</script>
